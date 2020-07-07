@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: orangered;
+            margin: 50px auto;
+            font-size: 20px;
+            font-weight: 500;
+            background: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        let box = document.getElementById('box');
+        function addZero(value) {
+            return value < 10 ? "0" + value : value;
+        }
+        function addTwozero(value) {
+            return value<100 ? '0'+value :value;
+        }
+        function transDay(value) {
+            let obj = {
+                0: '星期天',
+                1: '星期一',
+                2: '星期二',
+                3: '星期三',
+                4: '星期四',
+                5: '星期五',
+                6: '星期六',
+            }
+            return obj[value];
+        }
+        function createTime() {
+            let time = new Date(); // 获取当前时间，只不过当前的格式没办法直接使用
+
+            let year = time.getFullYear(); // 2020  年
+            let month = time.getMonth() + 1; // (0-11,分别代表1到12月份) 月份
+            let date = time.getDate(); // 获取日
+            let day = time.getDay(); // 获取星期(0-6, 0代表星期日)
+
+            let hour = time.getHours(); // 获取小时
+            let min = time.getMinutes(); // 获取分钟
+            let sec = time.getSeconds(); // 获取秒
+            let mill = time.getMilliseconds(); // 获取毫秒
+
+            let res = addZero(year) + '年' + addZero(month) + '月' + addZero(date) + '日' + ' ' + addZero(hour) + '时' + addZero(min) + '分' + addZero(sec) + '秒' + addTwozero(mill)+'毫秒' + transDay(day);
+            box.innerHTML = res;
+        }
+        createTime();
+        setInterval(createTime, 100);
+
+    </script>
+</body>
+
+</html>
